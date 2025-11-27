@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Загрузка фото</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<input type="file" id="uploadBtn" multiple accept="image/*">
+<div id="gallery"></div>
+
+<script>
+  const uploadBtn = document.getElementById('uploadBtn');
+  const gallery = document.getElementById('gallery');
+
+  uploadBtn.addEventListener('change', (event) => {
+    const files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        gallery.appendChild(img);
+      }
+      reader.readAsDataURL(files[i]);
+    }
+  });
+</script>
+
+</body>
+</html>
